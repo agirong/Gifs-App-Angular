@@ -11,8 +11,18 @@ export class GifsService {
     return [...this._tagsHistory]
   }
 
-  searchTag(tag: string):void{
+  organizeTags(tag: string):void{
+    if(this._tagsHistory.includes(tag)){
+      this._tagsHistory = this._tagsHistory.filter((element)=>element !== tag)
+    }
     this._tagsHistory.unshift(tag);
+  }
+
+  searchTag(tag: string):void{
+    if(tag.length == 0) return;
+
+    this.organizeTags(tag);
+
     console.log(this._tagsHistory);
   }
 }
