@@ -5,10 +5,10 @@ import { Gif, SearchResponse } from '../interface/gifs.interface';
 @Injectable({providedIn: 'root'})
 export class GifsService {
 
+  public gifList:Gif[] = [];
   private _tagsHistory: string[] = [];
   private apiKey:string = 'HQnY2DbLWcLaACpMSXGLd08qdFq0eRJp';
   private apiUrl:string = 'https://api.giphy.com/v1/gifs';
-  public tagList:Gif[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -34,8 +34,7 @@ export class GifsService {
 
     this.http.get<SearchResponse>(`${this.apiUrl}/search`,{params})
     .subscribe(resp=>{
-      this.tagList = resp.data;
-      console.log(this.tagList)
+      this.gifList = resp.data;
     })
   }
 }
